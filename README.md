@@ -7,7 +7,7 @@ Run installer
 
 open cmd and type:
 
-`node -v'
+`node -v`
 npm -v
 
 If both return a version, you have successfully installed Node.js and npm (JS package manager).
