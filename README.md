@@ -8,6 +8,7 @@ Run installer
 open cmd and type:
 
 `node -v`
+
 `npm -v`
 
 If both return a version, you have successfully installed Node.js and npm (JS package manager).
@@ -33,7 +34,9 @@ Once created, ensure that the fork is up-to-date by pressing the Sync fork butto
 Run the git clone command USING YOUR FORK
 
 `` git clone <forked_repo_url>`
- ``cd <fordked_repo_name>`
+
+``cd <fordked_repo_name>`
+
 `git remote add upstream <original_repo_url>`
 
 Then to begin working you must:
@@ -46,6 +49,7 @@ Once a commit is made, you push the commit through source control, and publish t
 Once the branch is merged into main, in order to update your code, run:
 
 `git checkout main`
+
 `git pull upstram main`
 
 Then you should update the forked repo:
