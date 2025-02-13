@@ -26,6 +26,32 @@ npm install
 
 npx expo start
 
+## HOW TO USE GITHUB TO WORK ON THE PROJECT AND MAKE UPDATES
+
+First open the Github repo, and press the fork button, create a fork and add a description.
+Once created, ensure that the fork is up-to-date by pressing the Sync fork button.
+Run the git clone command USING YOUR FORK
+
+git clone <forked_repo_url>
+cd <fordked_repo_name>
+git remote add upstream <original_repo_url>
+
+Then to begin working you must:
+
+git checkout -b <feature_branch_name>
+
+Then use VSCode source control or Gitlens to stage and commit a change.
+Once a commit is made, you push the commit through source control, and publish the branch TO UPSTREAM
+
+Once the branch is merged into main, in order to update your code, run:
+
+git checkout main
+git pull upstram main
+
+Then you should update the forked repo:
+
+git push origin main
+
 ## FOLLOWING STEPS ONLY FOR CREATING A NEW PROJECT
 
 Then run:
