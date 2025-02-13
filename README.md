@@ -7,24 +7,24 @@ Run installer
 
 open cmd and type:
 
-node -v
-npm -v
+'''node -v
+npm -v'''
 
 If both return a version, you have successfully installed Node.js and npm (JS package manager).
 
 Then traverse to a directory of your choice and run:
 
-git clone https://github.com/karstenenglander/RaveGuardianRevisited
+'''git clone https://github.com/karstenenglander/RaveGuardianRevisited'''
 
 Then type:
 
-cd RaveGuardianRevisited
+'''cd RaveGuardianRevisited'''
 
 Once you have successfully cloned the project files from the Github repo and navigated to the folder in cmd, run:
 
-npm install
+'''npm install
 
-npx expo start
+npx expo start'''
 
 ## HOW TO USE GITHUB TO WORK ON THE PROJECT AND MAKE UPDATES
 
