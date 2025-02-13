@@ -7,7 +7,7 @@ Run installer
 
 open cmd and type:
 
-```node -v
+`node -v'
 npm -v
 
 If both return a version, you have successfully installed Node.js and npm (JS package manager).
@@ -79,4 +79,7 @@ It should then open the app and allow you to view the app on your phone.
 You should be able to hit CTRL + S in VSCode to save code and it should push immediately to your phone.
 
 If you wish to end this process, you simply close the app as well as the terminal in VSCode.
+
+```
+
 ```
