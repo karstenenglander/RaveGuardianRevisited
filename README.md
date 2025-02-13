@@ -1,11 +1,10 @@
 # RaveGuardianRevisited
 
-SET-UP
+## Basic Setup
 
-Download Node.js from https://nodejs.org/en
-Run installer
+Download Node.js from https://nodejs.org/en and run installer
 
-open cmd and type:
+Then, open cmd and type:
 
 `node -v`
 
@@ -27,7 +26,7 @@ Once you have successfully cloned the project files from the Github repo and nav
 
 `npx expo start`
 
-## HOW TO USE GITHUB TO WORK ON THE PROJECT AND MAKE UPDATES
+## Github Instructions
 
 First open the Github repo, and press the fork button, create a fork and add a description.
 Once created, ensure that the fork is up-to-date by pressing the Sync fork button.
@@ -56,7 +55,7 @@ Then you should update the forked repo:
 
 `git push origin main`
 
-## FOLLOWING STEPS ONLY FOR CREATING A NEW PROJECT
+## Create a new project
 
 Then run:
 
