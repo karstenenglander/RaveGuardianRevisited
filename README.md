@@ -26,13 +26,7 @@ npm install
 
 npx expo start
 
-
-
-
-
-
-
-
+## FOLLOWING STEPS ONLY FOR CREATING A NEW PROJECT
 
 Then run:
 
@@ -42,7 +36,7 @@ Then open VSCode, click file, open folder, create a new folder in your desired d
 Once this is done, press terminal at the top, and create new terminal.
 In this terminal, navigate to the correct directory and run the command:
 
-npx create-expo-app AppName --template            You may replace AppName with the name of your folder, for simplicity, you may use our project name, RaveGuardianRevisited.
+npx create-expo-app AppName --template You may replace AppName with the name of your folder, for simplicity, you may use our project name, RaveGuardianRevisited.
 
 You may be prompted to install ExpoAppCreate or something like this, just press y and continue.
 You must also ensure that you select the blank template, not the blank typeScript template though.
