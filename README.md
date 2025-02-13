@@ -11,6 +11,29 @@ node -v
 npm -v
 
 If both return a version, you have successfully installed Node.js and npm (JS package manager).
+
+Then traverse to a directory of your choice and run:
+
+git clone https://github.com/karstenenglander/RaveGuardianRevisited
+
+Then type:
+
+cd RaveGuardianRevisited
+
+Once you have successfully cloned the project files from the Github repo and navigated to the folder in cmd, run:
+
+npm install
+
+npx expo start
+
+
+
+
+
+
+
+
+
 Then run:
 
 npm install -g expo-cli
