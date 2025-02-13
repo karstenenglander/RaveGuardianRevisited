@@ -33,9 +33,9 @@ First open the Github repo, and press the fork button, create a fork and add a d
 Once created, ensure that the fork is up-to-date by pressing the Sync fork button.
 Run the git clone command USING YOUR FORK
 
-`` git clone <forked_repo_url>`
+`git clone <forked_repo_url>`
 
-``cd <fordked_repo_name>`
+`cd <fordked_repo_name>`
 
 `git remote add upstream <original_repo_url>`
 
