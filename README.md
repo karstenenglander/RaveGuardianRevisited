@@ -42,10 +42,12 @@ Then to begin working you must:
 
 `git checkout -b <feature_branch_name>`
 
-Then use VSCode source control or Gitlens to stage and commit a change.
-Once a commit is made, you push the commit through source control, and publish the branch TO UPSTREAM
+Use VSCode Source Control OR GitLens to stage and commit any changes.
+Once a commit is made, push it through either Source Control OR GitLens
+Publish the branch to UPSTREAM, using Source Control OR GitLens
 
-Once the branch is merged into main, in order to update your code, run:
+Owner of the original Repo (karsten) must create a pull request to merge the main branch with the branch you have created and pushed to.
+Once the branches are merged in the original repo, it is recommended to update your local code by running:
 
 `git checkout main`
 
