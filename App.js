@@ -14,7 +14,7 @@ export default function App() {
   
       setTimeout(() => {
         // Simulate some work or API call here...
-        console.log("Three second timer completed.");
+        console.log("Three second timer completed");
   
         setIsLoading(false); // Hide the indicator
       }, 3000); // 3-second delay (adjust as needed)
