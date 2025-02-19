@@ -18,15 +18,15 @@ Then to begin working you must UPDATE your code:
 
 `git fetch upstream` (ALWAYS run this command before working in order to keep your code up-to-date)
 
-`git checkout main` (OR replace main with the specific branch you are working on)
+`git checkout main` (Selects main branch)
 
 `git merge upstream/main` (Merges latest changes from upstream to your local main)
+
+`git push origin main` (Push updated main to fork)
 
 Now you are ready to start working, so you must create a branch (before or after making changes):
 
 `git checkout -b <branch_name>` (switches to existing branch OR creates new branch, can be done before or after making changes)
-
-`git merge main` (Merge main into current feature branch)
 
 Use VSCode Source Control OR GitLens to stage and commit any changes.
 Alternatively, use terminal:
