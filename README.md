@@ -26,37 +26,6 @@ Once you have successfully cloned the project files from the Github repo and nav
 
 `npx expo start`
 
-## Github Instructions
-
-First open the Github repo, and press the fork button, create a fork and add a description.
-Once created, ensure that the fork is up-to-date by pressing the Sync fork button.
-Run the git clone command USING YOUR FORK
-
-`git clone <forked_repo_url>`
-
-`cd <fordked_repo_name>`
-
-`git remote add upstream <original_repo_url>`
-
-Then to begin working you must:
-
-`git checkout -b <feature_branch_name>`
-
-Use VSCode Source Control OR GitLens to stage and commit any changes.
-Once a commit is made, push it through either Source Control OR GitLens
-Publish the branch to UPSTREAM, using Source Control OR GitLens
-
-Owner of the original Repo (karsten) must create a pull request to merge the main branch with the branch you have created and pushed to.
-Once the branches are merged in the original repo, it is recommended to update your local code by running:
-
-`git checkout main`
-
-`git pull upstram main`
-
-Then you should update the forked repo:
-
-`git push origin main`
-
 ## Create a new project
 
 Then run:
