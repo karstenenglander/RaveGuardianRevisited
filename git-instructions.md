@@ -12,7 +12,7 @@ Run the git clone command USING YOUR FORK's repo:
 
 `git remote add upstream <original_repo_url>` (Links forked repo and allows you to upstream your work to original repo)
 
-## Working with Github repo
+## Keeping forked repo and local code up-to-date CONSTANTLY
 
 Then to begin working you must UPDATE your code:
 
@@ -23,6 +23,8 @@ Then to begin working you must UPDATE your code:
 `git merge upstream/main` (Merges latest changes from upstream to your local main)
 
 `git push origin main` (Push updated main to fork)
+
+## Saving changes you have made using Git
 
 Now you are ready to start working, so you must create a branch (before or after making changes):
 
