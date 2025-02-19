@@ -19,7 +19,7 @@ Once you have successfully cloned the project files from the Github repo and nav
 
 `npx expo start`
 
-## Create a new project
+## Create a new project (not recommended)
 
 Then run:
 
