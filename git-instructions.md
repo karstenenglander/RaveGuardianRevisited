@@ -22,8 +22,6 @@ Then to begin working you must UPDATE your code:
 
 `git merge upstream/main` (Merges latest changes from upstream to your local main)
 
-`git push origin main` (Push the updated main branch to fork)
-
 Now you are ready to start working, so you must create a branch (before or after making changes):
 
 `git checkout -b <branch_name>` (switches to existing branch OR creates new branch, can be done before or after making changes)
