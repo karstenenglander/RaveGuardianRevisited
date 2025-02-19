@@ -1,5 +1,7 @@
 # Github Instructions
 
+## Step 0:
+
 BEFORE following these steps ensure that you have:
 - Git installed
 - VSCode installed
@@ -11,9 +13,9 @@ You also MAY need to run the following commands:
 
 `git config --global user.email "email address (used for Github)"`
 
-## Initial Github Fork Instructions
+## Step 1: Initial Github Fork Instructions
 
-First open the Original Github repo, and press the fork button, and create a fork.
+First, open the Original Github repo, and press the fork button, and create a fork.
 Once created, ensure that the fork is up-to-date by pressing the Sync fork button on the main page of the forked repo.
 Run the git clone command USING YOUR FORK's repo:
 
