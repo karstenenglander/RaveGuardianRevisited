@@ -12,7 +12,7 @@ Then, open cmd and type:
 
 If both return a version, you have successfully installed Node.js and npm (JS package manager).
 
-Follow steps 1 & 2 in `[git-instructions.md](https://github.com/karstenenglander/RaveGuardianRevisited/blob/main/git-instructions.md)` and ensure that you are in the RaveGuardianRevisited directory.
+Follow steps 1 & 2 in `https://github.com/karstenenglander/RaveGuardianRevisited/blob/main/git-instructions.md` and ensure that you are in the RaveGuardianRevisited directory.
 Once you have successfully cloned the project files from the Github repo and navigated to the folder in cmd, run:
 
 `npm install`
