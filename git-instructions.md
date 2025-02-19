@@ -1,5 +1,16 @@
 # Github Instructions
 
+BEFORE following these steps ensure that you have:
+- Git installed
+- VSCode installed
+- GitLens extension installed on VSCode
+
+You also MAY need to run the following commands:
+
+`git config --global user.name "username (name used for Github)`
+
+`git config --global user.email "email address (used for Github)"`
+
 ## Initial Github Fork Instructions
 
 First open the Original Github repo, and press the fork button, and create a fork.
