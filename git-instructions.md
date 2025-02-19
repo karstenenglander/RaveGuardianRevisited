@@ -41,7 +41,7 @@ Once the branches are merged in the original repo, it is recommended to update y
 
 `git checkout main`
 
-`git pull upstram main`
+`git pull upstream main`
 
 Then you should update the forked repo:
 
