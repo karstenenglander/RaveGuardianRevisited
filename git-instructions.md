@@ -40,9 +40,11 @@ Use VSCode Source Control OR GitLens OR Terminal to stage and commit any changes
 
 `git commit -m "Commit message"` (Commit the staged changes and include description)
 
-Once a commit is made, push it through either Source Control OR GitLens OR Terminal:
+Once a commit is made, push it through TERMINAL THE FIRST TIME:
 
 `git push -u origin <branch-name>` (For future pushes to the same branch)
+
+After this first push, you may use Source Control, GitLens, or Terminal:
 
 `git push origin <branch-name>` (Once -u command was already used)
 
