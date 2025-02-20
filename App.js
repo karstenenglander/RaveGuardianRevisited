@@ -8,7 +8,7 @@ export default function App() {
   
     const handlePress = (newGreeting) => {
       setGreeting(newGreeting);
-      setIsLoading(true); // Show the indicator.
+      setIsLoading(true); // Show the indicator
   
       console.log("Three second timer started");
   
