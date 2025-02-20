@@ -15,33 +15,24 @@ You also MAY need to run the following commands:
 
 ## Step 1: Initial Github Fork Instructions
 
-First, open the Original Github repo, and press the fork button, and create a fork.
-Once created, ensure that the fork is up-to-date by pressing the Sync fork button on the main page of the forked repo.
-Run the git clone command USING YOUR FORK's repo:
+First, open the Original Github repo.
+Run the git clone command:
 
-`git clone <forked_repo_url>` (clone forked repo)
+`git clone <repo_url>` (clone forked repo)
 
-`cd <fordked_repo_name>` (navigate to dir)
+`cd <repo_name>` (navigate to dir)
 
-`git remote add upstream <original_repo_url>` (Links forked repo and allows you to upstream your work to original repo)
-
-## Keeping forked repo and local code up-to-date CONSTANTLY
+## When beginning to work 
 
 Then to begin working you must UPDATE your code:
 
-`git fetch upstream` (ALWAYS run this command before working in order to keep your code up-to-date)
-
-`git checkout main` (Selects main branch)
-
-`git merge upstream/main` (Merges latest changes from upstream to your local main)
-
-`git push origin main` (Push updated main to fork)
+`git fetch` (ALWAYS run this command before working in order to keep your code up-to-date)
 
 ## Saving changes you have made using Git
 
 Now you are ready to start working, so you must create a branch (before or after making changes):
 
-`git checkout -b <branch_name>` (switches to existing branch OR creates new branch, can be done before or after making changes)
+`git checkout -b <branch_name>` (CREATES new branch, remove -b for switching ONLY)
 
 Use VSCode Source Control OR GitLens to stage and commit any changes.
 Alternatively, use terminal:
@@ -55,9 +46,8 @@ Alternatively, use terminal:
 Once a commit is made, push it through either Source Control OR GitLens.
 Alternatively, use terminal:
 
-`git push -u origin <branch-name>` (Push changes to forked repo, adding upstream tracking)
 
-`git push origin <branch-name>` (For future pushes to the same branch, no need to use -u flag again)
+`git push origin <branch-name>` (For future pushes to the same branch)
 
 Publish the branch to UPSTREAM, using Source Control OR GitLens (through the pop-up at the top of the screen)
 
