@@ -10,7 +10,7 @@ export default function App() {
       setGreeting(newGreeting);
       setIsLoading(true); // Show the indicator.
   
-      console.log("Three second timer started");
+      console.log("Three second timer started.");
   
       setTimeout(() => {
         // Simulate some work or API call here...
