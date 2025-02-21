@@ -1,28 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
-
 const FourSquaresLayout = () => {
-=======
-export default function App() {
-    const [greeting, setGreeting] = useState("Current Timer: Zero Seconds"); // State for the greeting
-    const [isLoading, setIsLoading] = useState(false); // State for loading indicator
-  
-    const handlePress = (newGreeting) => {
-      setGreeting(newGreeting);
-      setIsLoading(true); // Show the indicator.
-  
-      console.log("Three second timer started.");
-  
-      setTimeout(() => {
-        // Simulate some work or API call here...
-        console.log("Three second timer completed");
-  
-        setIsLoading(false); // Hide the indicator
-      }, 3000); // 3-second delay (adjust as needed)
-
-  };
-  
   return (
     <View style={styles.container}>
       {/* Top Header */}
