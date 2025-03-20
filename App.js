@@ -1,13 +1,15 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView } from "react-native";
 
 const FourSquaresLayout = () => {
   return (
     <View style={styles.container}>
-      {/* Top Header */}
-      <View style={styles.header}>
-        <Text style={styles.headerText}>Montclair State University</Text>
-      </View>
+      {/* Top Header Positioned at Absolute Top */}
+      <SafeAreaView style={styles.safeArea}>
+        <View style={styles.header}>
+          <Text style={styles.headerText}>Montclair State University</Text>
+        </View>
+      </SafeAreaView>
 
       {/* Centered Rounded Squares with Text */}
       <View style={styles.squaresContainer}>
@@ -21,7 +23,7 @@ const FourSquaresLayout = () => {
         </View>
         <View style={styles.row}>
           <View style={styles.roundedSquare}>
-            <Text style={styles.squareText}>Submit Anonymous Tip</Text>
+            <Text style={styles.squareText}>Submit Tip</Text>
           </View>
           <View style={styles.roundedSquare}>
             <Text style={styles.squareText}>Call Police</Text>
@@ -46,46 +48,51 @@ const FourSquaresLayout = () => {
 };
 
 const styles = StyleSheet.create({
-  container:{
+  container: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "red", 
+    backgroundColor: "#b00b0b",
+  },
+  safeArea: {
+    width: '100%',
+    paddingVertical: 5,
+    position: 'absolute',
+    top: 0, // Ensures it's at the top
+
+    backgroundColor: "white",
   },
   header: {
-    position: "absolute",
-    top: "12%", // Positioned higher
-    width: "90%", // Wider header
-    height: 60, // Larger block height
-    backgroundColor: "white",
+    alignItems: 'center',
+    paddingVertical: 15,
     justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 10, // Rounded edges for a smooth look
+    elevation: 5,
   },
   headerText: {
-    fontSize: 18,
+    fontSize: 22,
     fontWeight: "bold",
-    color: "red", // Matching background
+    color: "#b00b0b",
+    textAlign: "center",
   },
   squaresContainer: {
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 50, // Ensures space between header and squares
+    marginTop: 100,
   },
   row: {
     flexDirection: "row",
   },
   roundedSquare: {
-    width: 130, // Increased size
-    height: 130, // Increased size
+    width: 130,
+    height: 130,
     backgroundColor: "white",
-    borderRadius: 25, // Fully rounded edges
-    margin: 15, // Space between squares
+    borderRadius: 25,
+    margin: 15,
     justifyContent: "center",
     alignItems: "center",
   },
   squareText: {
-    color: "red", // Red text for contrast
+    color: "#b00b0b",
     fontSize: 16,
     fontWeight: "bold",
   },
@@ -98,11 +105,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-evenly",
     alignItems: "center",
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
   },
   button: {
-    backgroundColor: "red",
+    backgroundColor: "#b00b0b",
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 10,
