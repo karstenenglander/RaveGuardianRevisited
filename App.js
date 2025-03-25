@@ -1,28 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView } from "react-native";
 
-
 const FourSquaresLayout = () => {
-=======
-export default function App() {
-    const [greeting, setGreeting] = useState("Current Timer: Zero Seconds"); // State for the greeting
-    const [isLoading, setIsLoading] = useState(false); // State for loading indicator
-  
-    const handlePress = (newGreeting) => {
-      setGreeting(newGreeting);
-      setIsLoading(true); // Show the indicator.
-  
-      console.log("Three second timer started.");
-  
-      setTimeout(() => {
-        // Simulate some work or API call here...
-        console.log("Three second timer completed");
-  
-        setIsLoading(false); // Hide the indicator
-      }, 3000); // 3-second delay (adjust as needed)
-
-  };
-  
   return (
     <View style={styles.container}>
       {/* Top Header Positioned at Absolute Top */}
@@ -76,15 +55,14 @@ const styles = StyleSheet.create({
     backgroundColor: "#b00b0b",
   },
   safeArea: {
-    width: '100%',
+    width: "100%",
     paddingVertical: 5,
-    position: 'absolute',
-    top: 0, // Ensures it's at the top
-
+    position: "absolute",
+    top: 0,
     backgroundColor: "white",
   },
   header: {
-    alignItems: 'center',
+    alignItems: "center",
     paddingVertical: 15,
     justifyContent: "center",
     elevation: 5,
