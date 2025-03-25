@@ -1,12 +1,12 @@
 Pushing my local code to my branch:
 
 Follow steps below:
-git branch (checks and confirms im on my branch)
-git checkout test4
-git add .
-git commit -m "add a commit message"
-git push origin test4
-Now go to my branch on github and confirm
+1) git branch (checks and confirms im on my branch)
+        2) git checkout test4
+                  3) git add .
+                          4)git commit -m "add a commit message"
+                                        5)git push origin test4
+                                                                    Now go to my branch on github and confirm
 
 
 # Github Instructions
