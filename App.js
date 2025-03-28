@@ -1,73 +1,42 @@
-import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView } from "react-native";
-import { NavigationHandler } from "./NavigationHandler";
+import React, { useState, useEffect } from "react";
+import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView, TextInput } from "react-native";
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { initializeApp } from 'firebase/app';
+import { getAnalytics } from "firebase/analytics";
+import SignInScreen from "./SignInScreen";
+import SignUpScreen from "./SignUpScreen";
+import FourSquaresLayout from "./FourSquaresLayout";
 
-const FourSquaresLayout = ({ navigation }) => {
+import { firebaseConfig } from './firebaseConfig';
+
+let firebaseApp; // Declare firebaseApp outside the component
+export const app = initializeApp(firebaseConfig); // Export app
+const analytics = getAnalytics(app);
+
+const Stack = createNativeStackNavigator();
+
+export default function App() {
+  useEffect(() => {
+    // Initialize Firebase only once
+    if (!firebaseApp) {
+      firebaseApp = initializeApp(firebaseConfig);
+      console.log("Firebase initialized!");
+    }
+  }, []);
+
   return (
-    <View style={styles.container}>
-      {/* Top Header Positioned at Absolute Top */}
-      <SafeAreaView style={styles.safeArea}>
-        <View style={styles.header}>
-          <Text style={styles.headerText}>Montclair State University</Text>
-        </View>
-      </SafeAreaView>
-
-      {/* Centered Rounded Squares with Text */}
-      <View style={styles.squaresContainer}>
-        <View style={styles.row}>
-          <TouchableOpacity 
-            style={styles.roundedSquare}
-            onPress={NavigationHandler.handleLiveChat}
-          >
-            <Text style={styles.squareText}>Live Chat</Text>
-          </TouchableOpacity>
-          <TouchableOpacity 
-            style={styles.roundedSquare}
-            onPress={NavigationHandler.handleSafetyTimer}
-          >
-            <Text style={styles.squareText}>Safety Timer</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.row}>
-          <TouchableOpacity 
-            style={styles.roundedSquare}
-            onPress={NavigationHandler.handleSubmitTip}
-          >
-            <Text style={styles.squareText}>Submit Tip</Text>
-          </TouchableOpacity>
-          <TouchableOpacity 
-            style={styles.roundedSquare}
-            onPress={NavigationHandler.handleCallPolice}
-          >
-            <Text style={styles.squareText}>Call Police</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-
-      {/* Bottom White Section with 3 Buttons */}
-      <View style={styles.bottomSection}>
-        <TouchableOpacity 
-          style={styles.button}
-          onPress={() => NavigationHandler.handleHomePress(navigation)}
-        >
-          <Text style={styles.buttonText}>Home</Text>
-        </TouchableOpacity>
-        <TouchableOpacity 
-          style={styles.button}
-          onPress={() => NavigationHandler.handleInboxPress(navigation)}
-        >
-          <Text style={styles.buttonText}>Inbox</Text>
-        </TouchableOpacity>
-        <TouchableOpacity 
-          style={styles.button}
-          onPress={() => NavigationHandler.handleSettingsPress(navigation)}
-        >
-          <Text style={styles.buttonText}>Settings</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="SignIn">
+        <Stack.Screen name="SignIn" component={SignInScreen} />
+        <Stack.Screen name="SignUp" component={SignUpScreen} />
+        <Stack.Screen name="Home" component={FourSquaresLayout} 
+          options={{ headerShown: false }} // Hide the header for the Home screen
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -139,5 +108,3 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 });
-
-export default FourSquaresLayout;
