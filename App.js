@@ -1,7 +1,8 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView } from "react-native";
+import { NavigationHandler } from "./NavigationHandler";
 
-const FourSquaresLayout = () => {
+const FourSquaresLayout = ({ navigation }) => {
   return (
     <View style={styles.container}>
       {/* Top Header Positioned at Absolute Top */}
@@ -14,32 +15,53 @@ const FourSquaresLayout = () => {
       {/* Centered Rounded Squares with Text */}
       <View style={styles.squaresContainer}>
         <View style={styles.row}>
-          <View style={styles.roundedSquare}>
+          <TouchableOpacity 
+            style={styles.roundedSquare}
+            onPress={NavigationHandler.handleLiveChat}
+          >
             <Text style={styles.squareText}>Live Chat</Text>
-          </View>
-          <View style={styles.roundedSquare}>
+          </TouchableOpacity>
+          <TouchableOpacity 
+            style={styles.roundedSquare}
+            onPress={NavigationHandler.handleSafetyTimer}
+          >
             <Text style={styles.squareText}>Safety Timer</Text>
-          </View>
+          </TouchableOpacity>
         </View>
         <View style={styles.row}>
-          <View style={styles.roundedSquare}>
+          <TouchableOpacity 
+            style={styles.roundedSquare}
+            onPress={NavigationHandler.handleSubmitTip}
+          >
             <Text style={styles.squareText}>Submit Tip</Text>
-          </View>
-          <View style={styles.roundedSquare}>
+          </TouchableOpacity>
+          <TouchableOpacity 
+            style={styles.roundedSquare}
+            onPress={NavigationHandler.handleCallPolice}
+          >
             <Text style={styles.squareText}>Call Police</Text>
-          </View>
+          </TouchableOpacity>
         </View>
       </View>
 
       {/* Bottom White Section with 3 Buttons */}
       <View style={styles.bottomSection}>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity 
+          style={styles.button}
+          onPress={() => NavigationHandler.handleHomePress(navigation)}
+        >
           <Text style={styles.buttonText}>Home</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity 
+          style={styles.button}
+          onPress={() => NavigationHandler.handleInboxPress(navigation)}
+        >
           <Text style={styles.buttonText}>Inbox</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity 
+          style={styles.button}
+          onPress={() => NavigationHandler.handleSettingsPress(navigation)}
+        >
           <Text style={styles.buttonText}>Settings</Text>
         </TouchableOpacity>
       </View>
