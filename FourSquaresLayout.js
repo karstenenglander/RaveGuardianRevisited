@@ -5,15 +5,7 @@ import { getAnalytics } from "firebase/analytics";
 import { useNavigation } from '@react-navigation/native'; // Import useNavigation
 
 // Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyCT7zqFLCIOaJCAxiQ0ie3-VsMply1uz6s",
-  authDomain: "raveguardianrevisited.firebaseapp.com",
-  projectId: "raveguardianrevisited",
-  storageBucket: "raveguardianrevisited.firebasestorage.app",
-  messagingSenderId: "1075487823888",
-  appId: "1:1075487823888:web:84892a78a937ef45379295",
-  measurementId: "G-XYRYJJTW0H"
-};
+import { firebaseConfig } from './firebaseConfig';
 
 let firebaseApp; // Declare firebaseApp outside the component
 const app = initializeApp(firebaseConfig);

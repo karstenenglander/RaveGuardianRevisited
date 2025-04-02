@@ -28,10 +28,12 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="SignIn">
-        <Stack.Screen name="SignIn" component={SignInScreen} />
-        <Stack.Screen name="SignUp" component={SignUpScreen} />
+        <Stack.Screen name="SignIn" component={SignInScreen}
+        options={{ headerShown: false }} />
+        <Stack.Screen name="SignUp" component={SignUpScreen}
+        options={{ headerShown: false }} />
         <Stack.Screen name="Home" component={FourSquaresLayout} 
-          options={{ headerShown: false }} // Hide the header for the Home screen
+        options={{ headerShown: false }} // Hide the header for the Home screen
         />
       </Stack.Navigator>
     </NavigationContainer>
