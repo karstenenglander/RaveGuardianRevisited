@@ -12,8 +12,6 @@ const analytics = getAnalytics(app);
 const FourSquaresLayout = () => { // Remove { navigation } from props
   const navigation = useNavigation(); // Access the navigation object
 
-
-
   const handleHomePress = () => {
     navigation.navigate('Home');
   };
