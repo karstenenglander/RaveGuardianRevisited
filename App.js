@@ -1,40 +1,35 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView, TextInput } from "react-native";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { initializeApp } from 'firebase/app';
-import { getAnalytics } from "firebase/analytics";
 import SignInScreen from "./SignInScreen";
 import SignUpScreen from "./SignUpScreen";
 import FourSquaresLayout from "./FourSquaresLayout";
+import SettingsScreen from './SettingsScreen';
+import InboxScreen from './InboxScreen';
+import LiveChatScreen from './LiveChatScreen';
+import SubmitTipScreen from './SubmitTipScreen';
+import SafetyTimerScreen from "./SafetyTimerScreen";
 
-import { firebaseConfig } from './firebaseConfig';
 
-let firebaseApp; // Declare firebaseApp outside the component
-export const app = initializeApp(firebaseConfig); // Export app
-const analytics = getAnalytics(app);
+// Firebase is initialized only once in firebaseConfig.js
+import './firebaseConfig'; // Just to make sure it runs once
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-  useEffect(() => {
-    // Initialize Firebase only once
-    if (!firebaseApp) {
-      firebaseApp = initializeApp(firebaseConfig);
-      console.log("Firebase initialized!");
-    }
-  }, []);
-
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="SignIn">
-        <Stack.Screen name="SignIn" component={SignInScreen}
-        options={{ headerShown: false }} />
-        <Stack.Screen name="SignUp" component={SignUpScreen}
-        options={{ headerShown: false }} />
-        <Stack.Screen name="Home" component={FourSquaresLayout} 
-        options={{ headerShown: false }} // Hide the header for the Home screen
-        />
+        <Stack.Screen name="SignIn" component={SignInScreen} />
+        <Stack.Screen name="SignUp" component={SignUpScreen} />
+        <Stack.Screen name="Home" component={FourSquaresLayout} options={{ headerShown: false }} />
+        <Stack.Screen name="Settings" component={SettingsScreen} />
+        <Stack.Screen name="Inbox" component={InboxScreen} />
+        <Stack.Screen name="LiveChat" component={LiveChatScreen} />
+        <Stack.Screen name="SubmitTip" component={SubmitTipScreen} />
+        <Stack.Screen name="SafetyTimer" component={SafetyTimerScreen} />
+        
       </Stack.Navigator>
     </NavigationContainer>
   );

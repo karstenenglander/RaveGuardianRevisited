@@ -5,22 +5,12 @@ import { getAnalytics } from "firebase/analytics";
 import { useNavigation } from '@react-navigation/native'; // Import useNavigation
 
 // Firebase configuration
-import { firebaseConfig } from './firebaseConfig';
+import { app } from './firebaseConfig'; // Import the configured app from firebaseConfig
 
-let firebaseApp; // Declare firebaseApp outside the component
-const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
 const FourSquaresLayout = () => { // Remove { navigation } from props
   const navigation = useNavigation(); // Access the navigation object
-
-  useEffect(() => {
-    // Initialize Firebase only once
-    if (!firebaseApp) {
-      firebaseApp = initializeApp(firebaseConfig);
-      console.log("Firebase initialized!");
-    }
-  }, []);
 
   const handleHomePress = () => {
     navigation.navigate('Home');
@@ -35,36 +25,15 @@ const FourSquaresLayout = () => { // Remove { navigation } from props
   };
 
   const handleLiveChat = () => {
-    Alert.alert(
-      'Live Chat', 
-      'Connect with campus safety support', 
-      [
-        { text: 'Cancel', style: 'cancel' },
-        { text: 'Start Chat', style: 'default' }
-      ]
-    );
+    navigation.navigate('LiveChat');
   };
 
   const handleSafetyTimer = () => {
-    Alert.alert(
-      'Safety Timer', 
-      'Activate safety monitoring timer', 
-      [
-        { text: 'Cancel', style: 'cancel' },
-        { text: 'Start Timer', style: 'default' }
-      ]
-    );
+    navigation.navigate("SafetyTimer");
   };
 
   const handleSubmitTip = () => {
-    Alert.alert(
-      'Submit Tip', 
-      'Anonymously report a safety concern', 
-      [
-        { text: 'Cancel', style: 'cancel' },
-        { text: 'Submit', style: 'default' }
-      ]
-    );
+    navigation.navigate('SubmitTip');
   };
 
   const handleCallPolice = () => {
