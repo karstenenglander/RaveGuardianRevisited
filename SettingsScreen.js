@@ -44,7 +44,7 @@ const SettingsScreen = () => {
       <Text style={styles.title}>Settings</Text>
 
       <TouchableOpacity style={styles.optionButton} onPress={() => setShowPasswordModal(true)}>
-        <Text style={styles.optionText}>Edit Account Information</Text>
+        <Text style={styles.optionText}>Change Password</Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.optionButton}>
