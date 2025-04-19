@@ -1,8 +1,11 @@
+// SignUpScreen.js with Firestore-based Terms check
 import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from "react-native";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigation } from '@react-navigation/native';
-import { app } from './App';
+import { auth, db } from './firebaseConfig';
+import { doc, setDoc } from "firebase/firestore";
+import { CURRENT_TERMS_VERSION } from './App';
 
 const SignUpScreen = () => {
   const [email, setEmail] = useState("");
@@ -11,12 +14,17 @@ const SignUpScreen = () => {
 
   const handleSignUp = async () => {
     try {
-      const auth = getAuth(app);
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
       console.log("User signed up:", user.email);
-      Alert.alert("Sign Up Successful", "You have successfully signed up.");
-      navigation.navigate('Home'); // Navigate to the main app screen
+
+      // Create initial user document without terms version yet
+      await setDoc(doc(db, "users", user.uid), {
+        email: user.email,
+        termsAcceptedVersion: null
+      });
+
+      navigation.navigate("TermsAndConditions", { user });
     } catch (error) {
       console.error("Error signing up:", error.message);
       Alert.alert("Sign Up Error", error.message);

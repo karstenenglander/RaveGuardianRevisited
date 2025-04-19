@@ -1,22 +1,33 @@
+// SignInScreen.js with Firestore-based Terms version check
 import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from "react-native";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigation } from '@react-navigation/native';
-import { app } from './App';
+import { auth, db } from './firebaseConfig';
+import { doc, getDoc } from "firebase/firestore";
+import { CURRENT_TERMS_VERSION } from './App';
 
 const SignInScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-    const navigation = useNavigation();
+  const navigation = useNavigation();
 
   const handleSignIn = async () => {
     try {
-      const auth = getAuth(app);
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
       console.log("User signed in:", user.email);
-      Alert.alert("Sign In Successful", "You have successfully signed in.");
-      navigation.navigate('Home'); // Navigate to the main app screen
+
+      const docRef = doc(db, "users", user.uid);
+      const docSnap = await getDoc(docRef);
+      const versionAccepted = docSnap.exists() ? docSnap.data().termsAcceptedVersion : null;
+
+      if (versionAccepted !== CURRENT_TERMS_VERSION) {
+        navigation.navigate("TermsAndConditions", { uid: user.uid });
+      } else {
+        Alert.alert("Sign In Successful", "You have successfully signed in.");
+        navigation.navigate("Home");
+      }
     } catch (error) {
       console.error("Error signing in:", error.message);
       Alert.alert("Sign In Error", error.message);

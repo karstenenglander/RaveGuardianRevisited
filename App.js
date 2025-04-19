@@ -1,3 +1,4 @@
+// Updated App.js with TermsAndConditions routing and version-aware logic
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView, TextInput } from "react-native";
 import { NavigationContainer } from '@react-navigation/native';
@@ -10,10 +11,17 @@ import InboxScreen from './InboxScreen';
 import LiveChatScreen from './LiveChatScreen';
 import SubmitTipScreen from './SubmitTipScreen';
 import SafetyTimerScreen from "./SafetyTimerScreen";
+import AccountDetails from './AccountDetails';
+import EmergencyContacts from './EmergencyContacts';
+import Vehicles from './Vehicles';
+import NotificationPreferences from './NotificationPreferences';
+import Feedback from './Feedback';
+import TermsAndConditions from './TermsAndConditions';
 
+// Define the current version of the Terms here
+export const CURRENT_TERMS_VERSION = "2025-04-14";
 
-// Firebase is initialized only once in firebaseConfig.js
-import './firebaseConfig'; // Just to make sure it runs once
+import './firebaseConfig'; // ensure firebase is initialized
 
 const Stack = createNativeStackNavigator();
 
@@ -21,15 +29,20 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="SignIn">
-        <Stack.Screen name="SignIn" component={SignInScreen} options={{ headerShown: false }}/>
-        <Stack.Screen name="SignUp" component={SignUpScreen} options={{ headerShown: false }}/>
+        <Stack.Screen name="SignIn" component={SignInScreen} />
+        <Stack.Screen name="SignUp" component={SignUpScreen} />
         <Stack.Screen name="Home" component={FourSquaresLayout} options={{ headerShown: false }} />
         <Stack.Screen name="Settings" component={SettingsScreen} />
         <Stack.Screen name="Inbox" component={InboxScreen} />
         <Stack.Screen name="LiveChat" component={LiveChatScreen} />
         <Stack.Screen name="SubmitTip" component={SubmitTipScreen} />
         <Stack.Screen name="SafetyTimer" component={SafetyTimerScreen} />
-        
+        <Stack.Screen name="AccountDetails" component={AccountDetails} />
+        <Stack.Screen name="EmergencyContacts" component={EmergencyContacts} />
+        <Stack.Screen name="Vehicles" component={Vehicles} />
+        <Stack.Screen name="NotificationPreferences" component={NotificationPreferences} />
+        <Stack.Screen name="Feedback" component={Feedback} />
+        <Stack.Screen name="TermsAndConditions" component={TermsAndConditions} />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -70,8 +83,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   roundedSquare: {
-    width: 160,
-    height: 160,
+    width: 130,
+    height: 130,
     backgroundColor: "white",
     borderRadius: 25,
     margin: 15,

@@ -1,6 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { View, Text, StyleSheet, Button, Alert } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
+import * as Location from 'expo-location';
+import { getFirestore, collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { getAuth } from 'firebase/auth';
 
 const SafetyTimerScreen = () => {
   const [hours, setHours] = useState('0');
@@ -8,6 +11,9 @@ const SafetyTimerScreen = () => {
   const [seconds, setSeconds] = useState('0');
   const [remaining, setRemaining] = useState(null);
   const timerRef = useRef(null);
+
+  const db = getFirestore();
+  const auth = getAuth();
 
   const totalSeconds = parseInt(hours) * 3600 + parseInt(minutes) * 60 + parseInt(seconds);
 
@@ -24,7 +30,32 @@ const SafetyTimerScreen = () => {
         if (prev === 1) {
           clearInterval(timerRef.current);
           timerRef.current = null;
-          Alert.alert("Emergency Alert", "Time's up! Your location has been sent to campus security.");
+
+          (async () => {
+            try {
+              const { status } = await Location.requestForegroundPermissionsAsync();
+              if (status !== 'granted') {
+                Alert.alert("Location Error", "Permission to access location was denied.");
+                return;
+              }
+
+              const location = await Location.getCurrentPositionAsync({});
+              await addDoc(collection(db, "safetyTimerAlerts"), {
+                user: auth.currentUser?.email || "Unknown",
+                location: {
+                  latitude: location.coords.latitude,
+                  longitude: location.coords.longitude,
+                },
+                timestamp: serverTimestamp()
+              });
+
+              Alert.alert("Emergency Alert", "Safety timer has reached 0! Your location has been sent to campus security.");
+            } catch (error) {
+              console.error("Failed to send location:", error);
+              Alert.alert("Error", "Could not send your location.");
+            }
+          })();
+
           return null;
         }
         return prev - 1;

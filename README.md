@@ -12,14 +12,50 @@ Then, open cmd and type:
 
 If both return a version, you have successfully installed Node.js and npm (JS package manager).
 
-Follow steps 1 & 2 in `git-instructions.md` and ensure that you are in the RaveGuardianRevisited directory.
+Then traverse to a directory of your choice and run:
+
+`git clone https://github.com/karstenenglander/RaveGuardianRevisited`
+
+Then type:
+
+`cd RaveGuardianRevisited`
+
 Once you have successfully cloned the project files from the Github repo and navigated to the folder in cmd, run:
 
 `npm install`
 
 `npx expo start`
 
-## Create a new project (not recommended)
+## Github Instructions
+
+First open the Github repo, and press the fork button, create a fork and add a description.
+Once created, ensure that the fork is up-to-date by pressing the Sync fork button.
+Run the git clone command USING YOUR FORK
+
+`git clone <forked_repo_url>`
+
+`cd <fordked_repo_name>`
+
+`git remote add upstream <original_repo_url>`
+
+Then to begin working you must:
+
+`git checkout -b <feature_branch_name>`
+
+Then use VSCode source control or Gitlens to stage and commit a change.
+Once a commit is made, you push the commit through source control, and publish the branch TO UPSTREAM
+
+Once the branch is merged into main, in order to update your code, run:
+
+`git checkout main`
+
+`git pull upstram main`
+
+Then you should update the forked repo:
+
+`git push origin main`
+
+## Create a new project
 
 Then run:
 
@@ -46,16 +82,3 @@ It should then open the app and allow you to view the app on your phone.
 You should be able to hit CTRL + S in VSCode to save code and it should push immediately to your phone.
 
 If you wish to end this process, you simply close the app as well as the terminal in VSCode.
-
-## Things used in this project
-
-React Native
-  - Background timer
-  - Geolocation
-  - Async storage
-
-Firebase
-  - App
-  - Auth
-  - Firestore
-  - Messaging

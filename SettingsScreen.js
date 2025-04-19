@@ -1,16 +1,49 @@
-import React, { useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Alert, TextInput, Modal } from "react-native";
-import { getAuth, signOut, updatePassword } from "firebase/auth";
+// Final SettingsScreen.js with all buttons including Terms and Conditions, Emergency Contacts, Vehicles, and Feedback
+import React, { useState, useEffect } from "react";
+import {
+  View, Text, StyleSheet, TouchableOpacity, Alert,
+  TextInput, Modal
+} from "react-native";
+import { getAuth, signOut, updatePassword, sendPasswordResetEmail } from "firebase/auth";
+import { getFirestore, collection, addDoc, serverTimestamp, doc, getDoc } from "firebase/firestore";
 import { useNavigation } from "@react-navigation/native";
 import { app } from './App';
 
 const SettingsScreen = () => {
   const navigation = useNavigation();
   const auth = getAuth(app);
+  const db = getFirestore(app);
   const user = auth.currentUser;
 
   const [showPasswordModal, setShowPasswordModal] = useState(false);
   const [newPassword, setNewPassword] = useState("");
+  const [showRecoverModal, setShowRecoverModal] = useState(false);
+  const [recoveryEmail, setRecoveryEmail] = useState("");
+  const [accountInfo, setAccountInfo] = useState(null);
+
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      if (user) {
+        const docRef = doc(db, "users", user.uid);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          setAccountInfo(docSnap.data());
+        }
+      }
+    };
+    fetchUserInfo();
+  }, []);
+
+  const logActivity = async (type, email) => {
+    try {
+      await addDoc(collection(db, "logs"), {
+        type, email,
+        timestamp: serverTimestamp()
+      });
+    } catch (error) {
+      console.error("Error logging activity:", error);
+    }
+  };
 
   const handleLogout = async () => {
     try {
@@ -30,6 +63,7 @@ const SettingsScreen = () => {
 
     try {
       await updatePassword(user, newPassword);
+      await logActivity("password_change", user.email);
       Alert.alert("Success", "Password updated successfully.");
       setShowPasswordModal(false);
       setNewPassword("");
@@ -39,25 +73,65 @@ const SettingsScreen = () => {
     }
   };
 
+  const handleSendRecoveryEmail = async () => {
+    if (!recoveryEmail.includes("@")) {
+      Alert.alert("Invalid Email", "Please enter a valid email address.");
+      return;
+    }
+
+    try {
+      await sendPasswordResetEmail(auth, recoveryEmail);
+      await logActivity("password_recovery", recoveryEmail);
+      Alert.alert("Email Sent", "Check your inbox for a recovery link.");
+      setShowRecoverModal(false);
+      setRecoveryEmail("");
+    } catch (error) {
+      console.error("Recovery error:", error);
+      Alert.alert("Error", error.message || "Could not send recovery email.");
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Settings</Text>
 
-      <TouchableOpacity style={styles.optionButton} onPress={() => setShowPasswordModal(true)}>
-        <Text style={styles.optionText}>Edit Account Information</Text>
+      <TouchableOpacity style={styles.optionButton} onPress={() => navigation.navigate("AccountDetails")}>        
+        <Text style={styles.optionText}>Account Details </Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.optionButton}>
+      <TouchableOpacity style={styles.optionButton} onPress={() => navigation.navigate("EmergencyContacts")}>        
+        <Text style={styles.optionText}>Emergency Contacts</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.optionButton} onPress={() => navigation.navigate("Vehicles")}>        
+        <Text style={styles.optionText}>My Vehicle</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.optionButton} onPress={() => setShowPasswordModal(true)}>
+        <Text style={styles.optionText}>Change Password</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.optionButton} onPress={() => navigation.navigate("NotificationPreferences")}>        
         <Text style={styles.optionText}>Notification Preferences</Text>
       </TouchableOpacity>
 
-     
+      <TouchableOpacity style={styles.optionButton} onPress={() => setShowRecoverModal(true)}>
+        <Text style={styles.optionText}>Recover Account</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.optionButton} onPress={() => navigation.navigate("TermsAndConditions")}>        
+        <Text style={styles.optionText}>View Terms and Conditions</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.optionButton} onPress={() => navigation.navigate("Feedback")}>        
+        <Text style={styles.optionText}>Feedback</Text>
+      </TouchableOpacity>
 
       <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
         <Text style={styles.logoutText}>Log Out</Text>
       </TouchableOpacity>
 
-      {/* Password Change Modal */}
+      {/* Password Modal */}
       <Modal visible={showPasswordModal} transparent={true} animationType="slide">
         <View style={styles.modalOverlay}>
           <View style={styles.modalContainer}>
@@ -74,6 +148,31 @@ const SettingsScreen = () => {
                 <Text style={styles.buttonText}>Update</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.buttonCancel} onPress={() => setShowPasswordModal(false)}>
+                <Text style={styles.buttonText}>Cancel</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </Modal>
+
+      {/* Recover Modal */}
+      <Modal visible={showRecoverModal} transparent={true} animationType="slide">
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContainer}>
+            <Text style={styles.modalTitle}>Recover Account</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Enter your email address"
+              keyboardType="email-address"
+              autoCapitalize="none"
+              value={recoveryEmail}
+              onChangeText={setRecoveryEmail}
+            />
+            <View style={styles.modalButtons}>
+              <TouchableOpacity style={styles.button} onPress={handleSendRecoveryEmail}>
+                <Text style={styles.buttonText}>Send</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.buttonCancel} onPress={() => setShowRecoverModal(false)}>
                 <Text style={styles.buttonText}>Cancel</Text>
               </TouchableOpacity>
             </View>
@@ -98,8 +197,6 @@ const styles = StyleSheet.create({
     paddingVertical: 15, marginTop: 30, backgroundColor: "#b00b0b", borderRadius: 8,
   },
   logoutText: { color: "#fff", textAlign: "center", fontWeight: "bold", fontSize: 16 },
-
-  // Modal styles
   modalOverlay: {
     flex: 1, backgroundColor: "rgba(0,0,0,0.5)", justifyContent: "center", alignItems: "center",
   },

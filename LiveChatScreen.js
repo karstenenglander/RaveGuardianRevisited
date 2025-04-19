@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { KeyboardAvoidingView, Platform, Keyboard, ScrollView, TouchableWithoutFeedback } from "react-native";
+import { KeyboardAvoidingView, Platform, Keyboard, TouchableWithoutFeedback } from "react-native";
 import {
   View,
   Text,
@@ -9,6 +9,8 @@ import {
   StyleSheet,
   ActivityIndicator,
   Alert,
+  TouchableOpacity,
+  ScrollView,
 } from "react-native";
 import * as Location from "expo-location";
 import { db, auth } from "./firebaseConfig"; // adjust if the path is different
@@ -28,6 +30,7 @@ const LiveChatScreen = () => {
   const [isSendingDisabled, setIsSendingDisabled] = useState(false);
   const [timeRemaining, setTimeRemaining] = useState(0);
   const sendTimesRef = useRef([]);
+  const flatListRef = useRef(null);
 
   useEffect(() => {
     (async () => {
@@ -45,7 +48,8 @@ const LiveChatScreen = () => {
   useEffect(() => {
     const q = query(collection(db, "livechat"), orderBy("timestamp", "asc"));
     const unsubscribe = onSnapshot(q, (snapshot) => {
-      setMessages(snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
+      const newMessages = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+      setMessages(newMessages);
     });
     return unsubscribe;
   }, []);
@@ -80,10 +84,12 @@ const LiveChatScreen = () => {
       text: message,
       sender: auth.currentUser?.email || "Anonymous",
       timestamp: serverTimestamp(),
-      location: location ? {
-        latitude: location.coords.latitude,
-        longitude: location.coords.longitude,
-      } : null,
+      location: location
+        ? {
+            latitude: location.coords.latitude,
+            longitude: location.coords.longitude,
+          }
+        : null,
     });
 
     setMessage("");
@@ -93,12 +99,12 @@ const LiveChatScreen = () => {
     <KeyboardAvoidingView
       style={{ flex: 1 }}
       behavior={Platform.OS === "ios" ? "padding" : "height"}
-      keyboardVerticalOffset={90} // Adjust this if your keyboard overlaps the input on iOS
+      keyboardVerticalOffset={90}
     >
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
         <View style={styles.container}>
           <Text style={styles.title}>Live Chat</Text>
-  
+
           {location ? (
             <Text style={styles.subtitle}>
               Lat: {location.coords.latitude}, Lon: {location.coords.longitude}
@@ -106,12 +112,13 @@ const LiveChatScreen = () => {
           ) : (
             <ActivityIndicator size="small" />
           )}
-  
+
           <FlatList
+            ref={flatListRef}
             data={messages}
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => (
-              <View style={styles.messageBubble}>
+              <TouchableOpacity activeOpacity={1} style={styles.messageBubble}>
                 <Text style={styles.sender}>{item.sender}</Text>
                 <Text>{item.text}</Text>
                 {item.timestamp?.seconds && (
@@ -119,11 +126,14 @@ const LiveChatScreen = () => {
                     {new Date(item.timestamp.seconds * 1000).toLocaleTimeString()}
                   </Text>
                 )}
-              </View>
+              </TouchableOpacity>
             )}
             contentContainerStyle={{ paddingBottom: 10 }}
+            showsVerticalScrollIndicator={true}
+            keyboardShouldPersistTaps="handled"
+            scrollEnabled={true}
           />
-  
+
           <TextInput
             style={styles.input}
             placeholder="Type a message..."
@@ -132,7 +142,7 @@ const LiveChatScreen = () => {
             returnKeyType="done"
             onSubmitEditing={Keyboard.dismiss}
           />
-  
+
           <Button
             title={isSendingDisabled ? `Wait ${timeRemaining}s` : "Send"}
             onPress={handleSend}
@@ -143,8 +153,6 @@ const LiveChatScreen = () => {
     </KeyboardAvoidingView>
   );
 };
-  
-
 
 const styles = StyleSheet.create({
   container: { flex: 1, padding: 20, backgroundColor: "#f2f2f2" },
