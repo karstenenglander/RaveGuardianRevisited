@@ -184,7 +184,7 @@ const LiveChatScreen = () => {
 
 const styles = StyleSheet.create({
   container: { flex: 1, padding: 20, backgroundColor: "#f2f2f2" },
-  title: { fontSize: 22, fontWeight: "bold", textAlign: "center", marginBottom: 10 },
+  title: { fontSize: 22, fontWeight: "bold", textAlign: "center", marginBottom: 10,     color: '#b00b0b',},
   subtitle: { textAlign: "center", marginBottom: 10 },
   messageBubble: {
     backgroundColor: "#fff",
