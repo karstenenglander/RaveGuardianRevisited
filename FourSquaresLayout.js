@@ -28,11 +28,18 @@ const FourSquaresLayout = () => {
     );
   };
 
-  const renderIcon = (SvgComponent, PngSource) => {
+  const renderIcon = (SvgComponent, PngSource, isLiveChat = false) => {
+    const iconStyle = {
+      width: 70,
+      height: 70,
+      marginBottom: 10,
+      ...(isLiveChat ? { marginLeft: 10 } : {}), // move Live Chat icon slightly right
+    };
+
     if (Platform.OS === 'android') {
-      return <Image source={PngSource} style={{ width: 70, height: 70, marginBottom: 10 }} />;
+      return <Image source={PngSource} style={iconStyle} />;
     } else {
-      return <SvgComponent width={70} height={70} style={{ marginBottom: 10 }} />;
+      return <SvgComponent width={70} height={70} style={iconStyle} />;
     }
   };
 
@@ -50,25 +57,33 @@ const FourSquaresLayout = () => {
       <View style={styles.squaresContainer}>
         <View style={styles.row}>
           <TouchableOpacity style={styles.roundedSquare} onPress={handleLiveChat}>
-            {renderIcon(LiveChatIcon, LiveChatIconPNG)}
-            <Text style={styles.squareText}>Live Chat</Text>
+            <View style={styles.iconTextContainer}>
+              {renderIcon(LiveChatIcon, LiveChatIconPNG, true)}
+              <Text style={styles.squareText}>Live Chat</Text>
+            </View>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.roundedSquare} onPress={handleSafetyTimer}>
-            {renderIcon(SafetyTimerIcon, SafetyTimerIconPNG)}
-            <Text style={styles.squareText}>Safety Timer</Text>
+            <View style={styles.iconTextContainer}>
+              {renderIcon(SafetyTimerIcon, SafetyTimerIconPNG)}
+              <Text style={styles.squareText}>Safety Timer</Text>
+            </View>
           </TouchableOpacity>
         </View>
 
         <View style={styles.row}>
           <TouchableOpacity style={styles.roundedSquare} onPress={handleSubmitTip}>
-            {renderIcon(TipIcon, TipIconPNG)}
-            <Text style={styles.squareText}>Submit Tip</Text>
+            <View style={styles.iconTextContainer}>
+              {renderIcon(TipIcon, TipIconPNG)}
+              <Text style={styles.squareText}>Submit Tip</Text>
+            </View>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.roundedSquare} onPress={handleCallPolice}>
-            {renderIcon(SOSIcon, SOSIconPNG)}
-            <Text style={styles.squareText}>Call Police</Text>
+            <View style={styles.iconTextContainer}>
+              {renderIcon(SOSIcon, SOSIconPNG)}
+              <Text style={styles.squareText}>Call Police</Text>
+            </View>
           </TouchableOpacity>
         </View>
       </View>
@@ -95,13 +110,48 @@ const styles = StyleSheet.create({
   header: { flexDirection: "row", alignItems: "center", paddingVertical: 15, justifyContent: "center", elevation: 5 },
   logo: { width: 50, height: 50, marginRight: 10 },
   headerText: { fontSize: 22, fontWeight: "bold", color: "#b00b0b", textAlign: "center" },
-  squaresContainer: { justifyContent: "center", alignItems: "center", marginTop: 100 },
+  squaresContainer: { justifyContent: "center", alignItems: "center", marginTop: 40 },
   row: { flexDirection: "row" },
-  roundedSquare: { width: 175, height: 175, backgroundColor: "white", borderRadius: 25, margin: 15, justifyContent: "flex-end", alignItems: "center", paddingBottom: 15 },
-  squareText: { color: "#b00b0b", fontSize: 16, fontWeight: "bold" },
-  bottomSection: { position: "absolute", bottom: 0, width: "100%", height: 100, backgroundColor: "white", flexDirection: "row", justifyContent: "space-evenly", alignItems: "center" },
-  button: { backgroundColor: "#b00b0b", paddingVertical: 10, paddingHorizontal: 20, borderRadius: 10 },
-  buttonText: { color: "white", fontSize: 14, fontWeight: "bold" },
+  roundedSquare: { 
+    width: 175, 
+    height: 175, 
+    backgroundColor: "white", 
+    borderRadius: 25, 
+    margin: 15, 
+    justifyContent: "center", 
+    alignItems: "center",
+  },
+  iconTextContainer: { 
+    justifyContent: "center", 
+    alignItems: "center",
+  },
+  squareText: { 
+    color: "#b00b0b", 
+    fontSize: 18, 
+    fontWeight: "bold", 
+    marginTop: 10,
+  },
+  bottomSection: { 
+    position: "absolute", 
+    bottom: 0, 
+    width: "100%", 
+    height: 100, 
+    backgroundColor: "white", 
+    flexDirection: "row", 
+    justifyContent: "space-evenly", 
+    alignItems: "center" 
+  },
+  button: { 
+    backgroundColor: "#b00b0b", 
+    paddingVertical: 10, 
+    paddingHorizontal: 20, 
+    borderRadius: 10 
+  },
+  buttonText: { 
+    color: "white", 
+    fontSize: 14, 
+    fontWeight: "bold" 
+  },
 });
 
 export default FourSquaresLayout;

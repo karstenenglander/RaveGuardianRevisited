@@ -26,21 +26,20 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="SignIn">
+
+        {/* Sign In, Sign Up, and Home */}
         <Stack.Screen name="SignIn" component={SignInScreen} options={{ headerShown: false }} />
         <Stack.Screen name="SignUp" component={SignUpScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Home" component={FourSquaresLayout} options={{ headerShown: false }} />
 
-        {/* Settings with Custom Header */}
+        {/* Settings */}
         <Stack.Screen 
           name="Settings" 
           component={SettingsScreen} 
           options={{
             headerTitle: () => (
               <View style={{ flexDirection: "row", alignItems: "center" }}>
-                <Image 
-                  source={require('./assets/msu_logo.png')}
-                  style={{ width: 40, height: 40, marginRight: 8 }}
-                />
+                <Image source={require('./assets/msu_logo.png')} style={{ width: 40, height: 40, marginRight: 8 }} />
                 <Text style={{ fontSize: 18, fontWeight: "bold", color: "#b00b0b" }}>
                   Montclair State University
                 </Text>
@@ -52,113 +51,206 @@ export default function App() {
           }}
         />
 
-        {/* Other Screens with Blank Headers */}
+        {/* Inbox */}
         <Stack.Screen 
-  name="Inbox" 
-  component={InboxScreen} 
-  options={{
-    headerTitle: () => (
-      <View style={{ flexDirection: "row", alignItems: "center" }}>
-        <Image 
-          source={require('./assets/msu_logo.png')}
-          style={{ width: 40, height: 40, marginRight: 8 }}
+          name="Inbox" 
+          component={InboxScreen} 
+          options={{
+            headerTitle: () => (
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <Image source={require('./assets/msu_logo.png')} style={{ width: 40, height: 40, marginRight: 8 }} />
+                <Text style={{ fontSize: 18, fontWeight: "bold", color: "#b00b0b" }}>
+                  Montclair State University
+                </Text>
+              </View>
+            ),
+            headerStyle: { backgroundColor: "white", height: 100 },
+            headerTitleAlign: "center",
+            headerShadowVisible: true,
+            headerBackVisible: Platform.OS !== 'android',
+          }}
         />
-        <Text style={{ fontSize: 18, fontWeight: "bold", color: "#b00b0b" }}>
-          Montclair State University
-        </Text>
-      </View>
-    ),
-    headerStyle: { backgroundColor: "white", height: 100 },
-    headerTitleAlign: "center",
-    headerShadowVisible: true, // bring back divider line
-    headerBackVisible: Platform.OS !== 'android',
-  }}
-/>
 
+        {/* Live Chat */}
         <Stack.Screen 
           name="LiveChat" 
           component={LiveChatScreen} 
           options={{
-            headerTitle: "",
+            headerTitle: () => (
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <Image source={require('./assets/msu_logo.png')} style={{ width: 40, height: 40, marginRight: 8 }} />
+                <Text style={{ fontSize: 18, fontWeight: "bold", color: "#b00b0b" }}>
+                  Montclair State University
+                </Text>
+              </View>
+            ),
             headerStyle: { backgroundColor: "white", height: 100 },
-            headerShadowVisible: false,
+            headerTitleAlign: "center",
+            headerShadowVisible: true,
             headerBackVisible: Platform.OS !== 'android',
           }}
         />
+
+        {/* Submit Tip */}
         <Stack.Screen 
           name="SubmitTip" 
           component={SubmitTipScreen} 
           options={{
-            headerTitle: "",
+            headerTitle: () => (
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <Image source={require('./assets/msu_logo.png')} style={{ width: 40, height: 40, marginRight: 8 }} />
+                <Text style={{ fontSize: 18, fontWeight: "bold", color: "#b00b0b" }}>
+                  Montclair State University
+                </Text>
+              </View>
+            ),
             headerStyle: { backgroundColor: "white", height: 100 },
-            headerShadowVisible: false,
+            headerTitleAlign: "center",
+            headerShadowVisible: true,
             headerBackVisible: Platform.OS !== 'android',
           }}
         />
+
+        {/* Safety Timer */}
         <Stack.Screen 
           name="SafetyTimer" 
           component={SafetyTimerScreen} 
           options={{
-            headerTitle: "",
+            headerTitle: () => (
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <Image source={require('./assets/msu_logo.png')} style={{ width: 40, height: 40, marginRight: 8 }} />
+                <Text style={{ fontSize: 18, fontWeight: "bold", color: "#b00b0b" }}>
+                  Montclair State University
+                </Text>
+              </View>
+            ),
             headerStyle: { backgroundColor: "white", height: 100 },
-            headerShadowVisible: false,
+            headerTitleAlign: "center",
+            headerShadowVisible: true,
             headerBackVisible: Platform.OS !== 'android',
           }}
         />
+
+        {/* Account Details */}
         <Stack.Screen 
           name="AccountDetails" 
           component={AccountDetails} 
           options={{
-            headerTitle: "",
+            headerTitle: () => (
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <Image source={require('./assets/msu_logo.png')} style={{ width: 40, height: 40, marginRight: 8 }} />
+                <Text style={{ fontSize: 18, fontWeight: "bold", color: "#b00b0b" }}>
+                  Montclair State University
+                </Text>
+              </View>
+            ),
             headerStyle: { backgroundColor: "white", height: 100 },
-            headerShadowVisible: false,
+            headerTitleAlign: "center",
+            headerShadowVisible: true,
+            headerBackVisible: Platform.OS !== 'android',
           }}
         />
+
+        {/* Emergency Contacts */}
         <Stack.Screen 
           name="EmergencyContacts" 
           component={EmergencyContacts} 
           options={{
-            headerTitle: "",
+            headerTitle: () => (
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <Image source={require('./assets/msu_logo.png')} style={{ width: 40, height: 40, marginRight: 8 }} />
+                <Text style={{ fontSize: 18, fontWeight: "bold", color: "#b00b0b" }}>
+                  Montclair State University
+                </Text>
+              </View>
+            ),
             headerStyle: { backgroundColor: "white", height: 100 },
-            headerShadowVisible: false,
+            headerTitleAlign: "center",
+            headerShadowVisible: true,
+            headerBackVisible: Platform.OS !== 'android',
           }}
         />
+
+        {/* Vehicles */}
         <Stack.Screen 
           name="Vehicles" 
           component={Vehicles} 
           options={{
-            headerTitle: "",
+            headerTitle: () => (
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <Image source={require('./assets/msu_logo.png')} style={{ width: 40, height: 40, marginRight: 8 }} />
+                <Text style={{ fontSize: 18, fontWeight: "bold", color: "#b00b0b" }}>
+                  Montclair State University
+                </Text>
+              </View>
+            ),
             headerStyle: { backgroundColor: "white", height: 100 },
-            headerShadowVisible: false,
+            headerTitleAlign: "center",
+            headerShadowVisible: true,
+            headerBackVisible: Platform.OS !== 'android',
           }}
         />
+
+        {/* Notification Preferences */}
         <Stack.Screen 
           name="NotificationPreferences" 
           component={NotificationPreferences} 
           options={{
-            headerTitle: "",
+            headerTitle: () => (
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <Image source={require('./assets/msu_logo.png')} style={{ width: 40, height: 40, marginRight: 8 }} />
+                <Text style={{ fontSize: 18, fontWeight: "bold", color: "#b00b0b" }}>
+                  Montclair State University
+                </Text>
+              </View>
+            ),
             headerStyle: { backgroundColor: "white", height: 100 },
-            headerShadowVisible: false,
+            headerTitleAlign: "center",
+            headerShadowVisible: true,
+            headerBackVisible: Platform.OS !== 'android',
           }}
         />
-        <Stack.Screen 
-          name="Feedback" 
-          component={Feedback} 
-          options={{
-            headerTitle: "",
-            headerStyle: { backgroundColor: "white", height: 100 },
-            headerShadowVisible: false,
-          }}
-        />
+
+        {/* Terms and Conditions */}
         <Stack.Screen 
           name="TermsAndConditions" 
           component={TermsAndConditions} 
           options={{
-            headerTitle: "",
+            headerTitle: () => (
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <Image source={require('./assets/msu_logo.png')} style={{ width: 40, height: 40, marginRight: 8 }} />
+                <Text style={{ fontSize: 18, fontWeight: "bold", color: "#b00b0b" }}>
+                  Montclair State University
+                </Text>
+              </View>
+            ),
             headerStyle: { backgroundColor: "white", height: 100 },
-            headerShadowVisible: false,
+            headerTitleAlign: "center",
+            headerShadowVisible: true,
+            headerBackVisible: Platform.OS !== 'android',
           }}
         />
+
+        {/* Feedback */}
+        <Stack.Screen 
+          name="Feedback" 
+          component={Feedback} 
+          options={{
+            headerTitle: () => (
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <Image source={require('./assets/msu_logo.png')} style={{ width: 40, height: 40, marginRight: 8 }} />
+                <Text style={{ fontSize: 18, fontWeight: "bold", color: "#b00b0b" }}>
+                  Montclair State University
+                </Text>
+              </View>
+            ),
+            headerStyle: { backgroundColor: "white", height: 100 },
+            headerTitleAlign: "center",
+            headerShadowVisible: true,
+            headerBackVisible: true,
+          }}
+        />
+
       </Stack.Navigator>
     </NavigationContainer>
   );
