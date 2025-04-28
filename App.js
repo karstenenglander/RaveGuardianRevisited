@@ -1,5 +1,6 @@
 // Updated App.js with TermsAndConditions routing and version-aware logic
 import React from "react";
+import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView, TextInput } from "react-native";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SignInScreen from "./SignInScreen";
@@ -16,9 +17,12 @@ import Vehicles from './Vehicles';
 import NotificationPreferences from './NotificationPreferences';
 import Feedback from './Feedback';
 import TermsAndConditions from './TermsAndConditions';
-import { app, auth, db } from './firebaseConfig'; // ensure firebase is initialized
+import { Platform } from "react-native";
 
+// Define the current version of the Terms here
 export const CURRENT_TERMS_VERSION = "2025-04-14";
+
+import { app, auth, db } from './firebaseConfig'; // ensure firebase is initialized
 
 const Stack = createNativeStackNavigator();
 
@@ -26,130 +30,40 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="SignIn">
-
-        <Stack.Screen
-          name="SignIn"
-          component={SignInScreen}
-          options={{ headerShown: false }}
+        <Stack.Screen name="SignIn" component={SignInScreen} options={{ headerShown: false }}/>
+        <Stack.Screen name="SignUp" component={SignUpScreen} options={{ headerShown: false }}/>
+        <Stack.Screen name="Home" component={FourSquaresLayout} options={{ headerShown: false }} />
+        <Stack.Screen name="Settings" component={SettingsScreen} />
+        <Stack.Screen 
+          name="Inbox" 
+          component={InboxScreen} 
+          options={{ headerBackVisible: Platform.OS !== 'android' }}
         />
-        <Stack.Screen
-          name="SignUp"
-          component={SignUpScreen}
-          options={{ headerShown: false }}
+        <Stack.Screen 
+          name="LiveChat" 
+          component={LiveChatScreen} 
+          options={{ headerBackVisible: Platform.OS !== 'android' }}
         />
-        <Stack.Screen
-          name="Home"
-          component={FourSquaresLayout}
-          options={{ headerShown: false }}
+        <Stack.Screen 
+          name="SubmitTip" 
+          component={SubmitTipScreen} 
+          options={{ headerBackVisible: Platform.OS !== 'android' }}
         />
-        
-        {/* Screens with white header but NO text */}
-        <Stack.Screen
-          name="Settings"
-          component={SettingsScreen}
-          options={{
-            headerTitle: () => null,
-            headerStyle: { backgroundColor: "white" },
-            headerShadowVisible: false,
-          }}
+        <Stack.Screen 
+          name="SafetyTimer" 
+          component={SafetyTimerScreen} 
+          options={{ headerBackVisible: Platform.OS !== 'android' }}
         />
-        <Stack.Screen
-          name="Inbox"
-          component={InboxScreen}
-          options={{
-            headerTitle: () => null,
-            headerStyle: { backgroundColor: "white" },
-            headerShadowVisible: false,
-          }}
-        />
-        <Stack.Screen
-          name="LiveChat"
-          component={LiveChatScreen}
-          options={{
-            headerTitle: () => null,
-            headerStyle: { backgroundColor: "white" },
-            headerShadowVisible: false,
-          }}
-        />
-        <Stack.Screen
-          name="SubmitTip"
-          component={SubmitTipScreen}
-          options={{
-            headerTitle: () => null,
-            headerStyle: { backgroundColor: "white" },
-            headerShadowVisible: false,
-          }}
-        />
-        <Stack.Screen
-          name="SafetyTimer"
-          component={SafetyTimerScreen}
-          options={{
-            headerTitle: () => null,
-            headerStyle: { backgroundColor: "white" },
-            headerShadowVisible: false,
-          }}
-        />
-        <Stack.Screen
-          name="AccountDetails"
-          component={AccountDetails}
-          options={{
-            headerTitle: () => null,
-            headerStyle: { backgroundColor: "white" },
-            headerShadowVisible: false,
-          }}
-        />
-        <Stack.Screen
-          name="EmergencyContacts"
-          component={EmergencyContacts}
-          options={{
-            headerTitle: () => null,
-            headerStyle: { backgroundColor: "white" },
-            headerShadowVisible: false,
-          }}
-        />
-        <Stack.Screen
-          name="Vehicles"
-          component={Vehicles}
-          options={{
-            headerTitle: () => null,
-            headerStyle: { backgroundColor: "white" },
-            headerShadowVisible: false,
-          }}
-        />
-        <Stack.Screen
-          name="NotificationPreferences"
-          component={NotificationPreferences}
-          options={{
-            headerTitle: () => null,
-            headerStyle: { backgroundColor: "white" },
-            headerShadowVisible: false,
-          }}
-        />
-        <Stack.Screen
-          name="Feedback"
-          component={Feedback}
-          options={{
-            headerTitle: () => null,
-            headerStyle: { backgroundColor: "white" },
-            headerShadowVisible: false,
-          }}
-        />
-        <Stack.Screen
-          name="TermsAndConditions"
-          component={TermsAndConditions}
-          options={{
-            headerTitle: () => null,
-            headerStyle: { backgroundColor: "white" },
-            headerShadowVisible: false,
-          }}
-        />
-
+        <Stack.Screen name="AccountDetails" component={AccountDetails}  />
+        <Stack.Screen name="EmergencyContacts" component={EmergencyContacts} />
+        <Stack.Screen name="Vehicles" component={Vehicles} />
+        <Stack.Screen name="NotificationPreferences" component={NotificationPreferences} />
+        <Stack.Screen name="Feedback" component={Feedback} />
+        <Stack.Screen name="TermsAndConditions" component={TermsAndConditions} />
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
-
-import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
