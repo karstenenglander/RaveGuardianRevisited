@@ -38,3 +38,6 @@ yarn-error.*
 # Firebase API key
 
 firebaseConfig.js
+
+# Android
+android/
