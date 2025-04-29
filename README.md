@@ -24,6 +24,9 @@ Once you have successfully cloned the project files from the Github repo and nav
 
 `npm install`
 
+At this stage you will need our Firebase config file, however, for security purposes we do not store this in our repository. If you believe that you are entitled to use our Firebase API keys, please reach out to one of the developers.
+If you wish to use your own API keys, we have provided the structure of our firebaseConfig.js file at the end of this readme.
+
 `npx expo start`
 
 ## Github Instructions
