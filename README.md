@@ -127,3 +127,44 @@ a (to open on Android device)
 This will launch the app natively on your connected Android phone. No Expo Go app is required.
 
 Pressing a before pressing s will have the Android phone attempt to install expo go.
+
+## Firebase Config
+
+Before running `npx expo start` you need to add the `firebaseConfig.js` file.
+In order to do this, create a new js file named `firebaseConfig.js` and paste the following:
+
+`// firebaseConfig.js
+import { initializeApp, getApps, getApp } from "firebase/app";
+import {
+  getAuth,
+  initializeAuth,
+  getReactNativePersistence,
+} from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+const firebaseConfig = {
+  apiKey: "",
+  authDomain: "",
+  projectId: "",
+  storageBucket: "",
+  messagingSenderId: "",
+  appId: "",
+  measurementId: ""
+};
+
+const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
+
+const auth =
+  getApps().length === 0
+    ? initializeAuth(app, {
+        persistence: getReactNativePersistence(AsyncStorage),
+      })
+    : getAuth(app);
+
+const db = getFirestore(app);
+
+export { app, auth, db };`
+
+PLEASE NOTE: This firebaseConfig.js file does NOT contain the actual key values, those will need to be entered manually.
+
