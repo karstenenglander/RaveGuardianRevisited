@@ -99,7 +99,7 @@ Android Emulator (optional, if you want to use a virtual device)
 
 Add Android SDK to your system PATH if prompted during installation.
 
-## Device Setup
+# Device Setup
 
 If using a physical Android device:
 
@@ -109,7 +109,7 @@ Connect it to your computer via USB cable.
 
 Accept the USB Debugging Authorization prompt that appears.
 
-## Steps to Run the App on Android
+# Steps to Run the App on Android
 
 Open a terminal in the project directory.
 
