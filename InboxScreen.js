@@ -1,8 +1,28 @@
 // InboxScreen.js
-import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, FlatList, TextInput, Button, Alert, KeyboardAvoidingView, Platform, Keyboard, TouchableWithoutFeedback } from "react-native";
+import React, { useState, useEffect, useRef } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  TextInput,
+  Button,
+  Alert,
+  KeyboardAvoidingView,
+  Platform,
+  Keyboard,
+  TouchableWithoutFeedback,
+  Animated,
+} from "react-native";
 import { auth, db } from "./firebaseConfig";
-import { collection, addDoc, onSnapshot, orderBy, query, serverTimestamp } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  onSnapshot,
+  orderBy,
+  query,
+  serverTimestamp,
+} from "firebase/firestore";
 import MainScreenWrapper from "./MainScreenWrapper";
 
 const ADMIN_EMAILS = [
@@ -15,9 +35,10 @@ const ADMIN_EMAILS = [
 const InboxScreen = () => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
-
   const userEmail = auth.currentUser?.email || "Anonymous";
   const isAdmin = ADMIN_EMAILS.includes(userEmail);
+
+  const inputBottom = useRef(new Animated.Value(80)).current;
 
   useEffect(() => {
     const q = query(collection(db, "inbox"), orderBy("timestamp", "desc"));
@@ -26,6 +47,29 @@ const InboxScreen = () => {
     });
 
     return () => unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    const showSub = Keyboard.addListener("keyboardWillShow", () => {
+      Animated.timing(inputBottom, {
+        toValue: 10,
+        duration: 50,
+        useNativeDriver: false,
+      }).start();
+    });
+
+    const hideSub = Keyboard.addListener("keyboardWillHide", () => {
+      Animated.timing(inputBottom, {
+        toValue: 80,
+        duration: 50,
+        useNativeDriver: false,
+      }).start();
+    });
+
+    return () => {
+      showSub.remove();
+      hideSub.remove();
+    };
   }, []);
 
   const handleSend = async () => {
@@ -51,32 +95,37 @@ const InboxScreen = () => {
         keyboardVerticalOffset={90}
       >
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-          <View style={styles.container}>
-            <Text style={styles.title}>Inbox</Text>
+          <View style={{ flex: 1 }}>
+            <View style={styles.container}>
+              <Text style={styles.title}>Inbox</Text>
 
-            {messages.length === 0 ? (
-              <Text style={{ marginTop: 10 }}>(No messages yet.)</Text>
-            ) : (
-              <FlatList
-                data={messages}
-                keyExtractor={(item) => item.id}
-                renderItem={({ item }) => (
-                  <View style={styles.messageBubble}>
-                    <Text style={styles.sender}>{item.sender}</Text>
-                    <Text>{item.text}</Text>
-                    {item.timestamp?.seconds && (
-                      <Text style={styles.timestamp}>
-                        {new Date(item.timestamp.seconds * 1000).toLocaleTimeString()}
-                      </Text>
-                    )}
-                  </View>
-                )}
-                contentContainerStyle={{ paddingBottom: 10 }}
-              />
-            )}
+              {messages.length === 0 ? (
+                <Text style={{ marginTop: 10 }}>(No messages yet.)</Text>
+              ) : (
+                <FlatList
+                  data={messages}
+                  keyExtractor={(item) => item.id}
+                  renderItem={({ item }) => (
+                    <View style={styles.messageBubble}>
+                      <Text style={styles.sender}>{item.sender}</Text>
+                      <Text>{item.text}</Text>
+                      {item.timestamp?.seconds && (
+                        <Text style={styles.timestamp}>
+                          {new Date(item.timestamp.seconds * 1000).toLocaleTimeString()}
+                        </Text>
+                      )}
+                    </View>
+                  )}
+                  contentContainerStyle={{ paddingBottom: isAdmin ? 160 : 20 }}
+                />
+              )}
+            </View>
 
             {isAdmin && (
-              <>
+              <Animated.View style={[
+                styles.inputContainer,
+                { bottom: inputBottom }
+              ]}>
                 <TextInput
                   style={styles.input}
                   placeholder="Type a message to all users..."
@@ -86,7 +135,7 @@ const InboxScreen = () => {
                   onSubmitEditing={Keyboard.dismiss}
                 />
                 <Button title="Send" onPress={handleSend} />
-              </>
+              </Animated.View>
             )}
           </View>
         </TouchableWithoutFeedback>
@@ -108,8 +157,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
     marginBottom: 10,
-    color: "#b00b0b",
-
   },
   messageBubble: {
     backgroundColor: "#f1f1f1",
@@ -126,12 +173,19 @@ const styles = StyleSheet.create({
     color: "gray",
     marginTop: 2,
   },
+  inputContainer: {
+    position: "absolute",
+    left: 20,
+    right: 20,
+    backgroundColor: "#fff",
+    paddingBottom: 10,
+  },
   input: {
     backgroundColor: "#f9f9f9",
     borderWidth: 1,
     borderColor: "#ccc",
     padding: 10,
-    marginTop: 15,
     borderRadius: 6,
+    marginBottom: 10,
   },
 });
