@@ -86,6 +86,17 @@ You should be able to hit CTRL + S in VSCode to save code and it should push imm
 
 If you wish to end this process, you simply close the app as well as the terminal in VSCode.
 
+## Missing firebaseConfig.js file
+
+this project utilizes Karsten's private Firebase API key which isn't something that should be available on a public GitHub
+
+As such we added it to the gitignore file, so when you run git clone to clone the GitHub repository it won't be downloaded
+
+That file is available on James' google drive in a folder who's access has been shared with professor Samuel
+
+Download that file from there and place it within the main Rave Guardian directory to run the app on your computer
+
+
 ## Android Version
 
 Before running the app on an Android device, you must install Android Studio:
