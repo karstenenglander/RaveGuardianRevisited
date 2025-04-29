@@ -15,25 +15,60 @@ const TermsAndConditions = () => {
   const uid = route.params?.uid;
 
   const handleAgree = async () => {
-    if (uid) {
-      await setDoc(doc(db, "users", uid), {
-        termsAcceptedVersion: CURRENT_TERMS_VERSION
-      }, { merge: true });
+    try {
+      if (uid) {
+        await setDoc(doc(db, "users", uid), {
+          termsAcceptedVersion: CURRENT_TERMS_VERSION
+        }, { merge: true });
+      }
+
+      // Delay navigation to avoid unmount crash on Android
+      setTimeout(() => {
+        navigation.reset({
+          index: 0,
+          routes: [{ name: "Home" }],
+        });
+      }, 50);
+    } catch (error) {
+      console.error("Error saving terms acceptance:", error);
+      Alert.alert("Error", "Failed to save your response. Please try again.");
     }
-    navigation.reset({
-      index: 0,
-      routes: [{ name: "Home" }],
-    });
   };
 
-  const handleDecline = async () => {
-    Alert.alert("Access Denied", "You must accept the Terms to use the app.");
-    await signOut(auth);
-    navigation.reset({
-      index: 0,
-      routes: [{ name: "SignIn" }],
-    });
-  };
+  const handleDecline = () => {
+    Alert.alert(
+      "Decline Terms?",
+      "If you do not accept the terms, you will be signed out of the app.",
+      [
+        {
+          text: "Cancel",
+          style: "cancel"
+        },
+        {
+          text: "Decline",
+          style: "destructive",
+          onPress: () => {
+            Alert.alert(
+              "Access Denied",
+              "You must accept the Terms to use the app.",
+              [
+                {
+                  text: "OK",
+                  onPress: async () => {
+                    await signOut(auth);
+                    navigation.reset({
+                      index: 0,
+                      routes: [{ name: "SignIn" }],
+                    });
+                  }
+                }
+              ]
+            );
+          }
+        }
+      ]
+    );
+  };  
 
   return (
     <View style={styles.container}>
