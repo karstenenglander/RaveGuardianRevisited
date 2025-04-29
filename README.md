@@ -82,3 +82,45 @@ It should then open the app and allow you to view the app on your phone.
 You should be able to hit CTRL + S in VSCode to save code and it should push immediately to your phone.
 
 If you wish to end this process, you simply close the app as well as the terminal in VSCode.
+
+## Android Version
+
+Before running the app on an Android device, you must install Android Studio:
+
+Download and install Android Studio: https://developer.android.com/studio
+
+During installation, make sure to install:
+
+Android SDK
+
+Android SDK Command-line Tools
+
+Android Emulator (optional, if you want to use a virtual device)
+
+Add Android SDK to your system PATH if prompted during installation.
+
+## Device Setup
+
+If using a physical Android device:
+
+Enable Developer Options and USB Debugging on the device.
+
+Connect it to your computer via USB cable.
+
+Accept the USB Debugging Authorization prompt that appears.
+
+## Steps to Run the App on Android
+
+Open a terminal in the project directory.
+
+Start the development server: npx expo start
+
+In the terminal after the QR code appears, press:
+
+s (to switch to development build mode)
+
+a (to open on Android device)
+
+This will launch the app natively on your connected Android phone. No Expo Go app is required.
+
+Pressing a before pressing s will have the Android phone attempt to install expo go.
